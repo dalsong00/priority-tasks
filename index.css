@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poor Story", cursive;
+}
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightblue;
+}
+
+header {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 25px;
+}
+
+.weather {
+  font-weight: 800;
+}
