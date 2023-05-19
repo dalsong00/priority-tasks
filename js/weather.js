@@ -1,8 +1,9 @@
+//현 위치 가져오기
 const getLoaction = () => {
   const options = {
     enableHighAccuracy: true,
     maximumAge: 30000,
-    timeout: 27000,
+    timeout: 30000,
   };
 
   navigator.geolocation.getCurrentPosition(
@@ -12,32 +13,46 @@ const getLoaction = () => {
   );
 };
 
+// 현 위치 가져오기 성공 : 현 위치의 위도와 경도를 바탕으로 날씨 정보 가져오기
 const getLocationSuc = (position) => {
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
-
   getWeatherInfo(latitude, longitude);
 };
 
+// 현 위치 가져오기 실패 : 에러 메세지 alert 띄우기
 const getLocationErr = (error) => {
-  alert(`${error.code}가 발생하여 위치 정보를 찾을 수 없습니다.`);
+  alert(`에러가 발생하여 위치 정보를 찾을 수 없습니다.\n${error.message}`);
 };
 
-const getWeatherInfo = (latitude, longitude) => {
+// 날씨 정보 가져오기 : getLocationsuc에서 넘겨받은 위도와 경도 활용
+const getWeatherInfo = async (latitude, longitude) => {
   const APIKEY = "91ab9442f47f179e8d008c3a609c5e3e";
 
-  fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKEY}&units=metric`
-  )
-    .then((res) => res.json())
-    .then((result) => {
-      const weatherInfo = result;
-      const temp = weatherInfo.main.temp;
-      const weather = weatherInfo.weather[0].main;
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKEY}&units=metric`
+    );
 
-      document.querySelector(".weather").textContent = weatherValue[weather];
-      document.querySelector(".temp").textContent = temp.toFixed(1) + " °C";
-    });
+    if (!response.ok) {
+      throw new Error("Weather API 요청이 실패했습니다.");
+    }
+
+    const result = await response.json();
+    displayWeatherInfo(result);
+  } catch (error) {
+    alert("error가 발생했습니다. 콘솔 창을 확인해주세요.");
+    console.log(error);
+  }
+};
+
+// 얻은 날씨 정보를 화면에 띄우기
+const displayWeatherInfo = (weatherInfo) => {
+  const temp = weatherInfo.main.temp;
+  const weather = weatherInfo.weather[0].main;
+
+  document.querySelector(".weather").textContent = weatherValue[weather];
+  document.querySelector(".temp").textContent = temp.toFixed(1) + " °C";
 };
 
 const weatherValue = {
