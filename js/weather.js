@@ -39,7 +39,9 @@ const getWeatherInfo = async (latitude, longitude) => {
     }
 
     const result = await response.json();
-    displayWeatherInfo(result);
+    const temp = result.main.temp;
+    const weather = result.weather[0].main;
+    displayWeatherInfo(temp, weather);
   } catch (error) {
     alert("error가 발생했습니다. 콘솔 창을 확인해주세요.");
     console.log(error);
@@ -47,10 +49,8 @@ const getWeatherInfo = async (latitude, longitude) => {
 };
 
 // 얻은 날씨 정보를 화면에 띄우기
-const displayWeatherInfo = (weatherInfo) => {
-  const temp = weatherInfo.main.temp;
-  const weather = weatherInfo.weather[0].main;
-
+const displayWeatherInfo = (temp, weather) => {
+  changeBackgroundImg(weather);
   document.querySelector(".weather").textContent = weatherValue[weather];
   document.querySelector(".temp").textContent = temp.toFixed(1) + " °C";
 };
@@ -65,6 +65,14 @@ const weatherValue = {
   Clouds: "흐림",
   Fog: "안개",
   Haze: "실안개",
+};
+
+// 날씨에 따라 배경화면 이미지 변경하기
+const changeBackgroundImg = (weather) => {
+  const wrapper = document.querySelector(".wrapper");
+  wrapper.style.background = `url('/images/background/${weather}.jpg') no-repeat`;
+  wrapper.style.backgroundSize = "cover";
+  wrapper.style.backgroundPosition = "center";
 };
 
 getLoaction();
