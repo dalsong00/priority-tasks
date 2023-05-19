@@ -15,7 +15,6 @@ const getCurrentTime = () => {
   const date = today.getDate().toString().padStart(2, "0");
   const day = weekday[today.getDay()];
   const hour = hourFormat(today.getHours());
-
   const minute = today.getMinutes().toString().padStart(2, "0");
 
   return [year, month, date, day, hour, minute];
