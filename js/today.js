@@ -1,16 +1,22 @@
 const weekday = ["일", "월", "화", "수", "목", "금", "토"];
 
+const hourFormat = (hour) => {
+  if (hour > 12) {
+    return `오후 ${(hour - 12).toString().padStart(2, "0")}`;
+  } else {
+    return `오전 ${hour.toString().padStart(2, "0")}`;
+  }
+};
+
 const getCurrentTime = () => {
   const today = new Date();
   const year = today.getFullYear();
   const month = (today.getMonth() + 1).toString().padStart(2, "0");
   const date = today.getDate().toString().padStart(2, "0");
   const day = weekday[today.getDay()];
-  const hour =
-    today.getHours() > 12
-      ? `오후 ${(today.getHours() - 12).toString().padStart(2, "0")}`
-      : `오전 ${today.getHours().toString().padStart(2, "0")}`;
-  const minute = today.getMinutes();
+  const hour = hourFormat(today.getHours());
+
+  const minute = today.getMinutes().toString().padStart(2, "0");
 
   return [year, month, date, day, hour, minute];
 };
