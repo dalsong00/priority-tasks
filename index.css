@@ -53,3 +53,22 @@ main {
   margin-bottom: 20px;
   font-weight: 800;
 }
+
+/* 타이머 */
+.timer-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.timer-section button {
+  font-size: 15px;
+  margin: 0 5px;
+  padding: 2px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
