@@ -1,12 +1,21 @@
 let time = 0;
 let timerState = null;
+let stopWatchState = false;
 
 const startBtn = document.querySelector(".strat-btn");
 const stopBtn = document.querySelector(".stop-btn");
 const resetBtn = document.querySelector(".reset-btn");
 
 const startStopWatch = () => {
-  timerState = setInterval(updateTime, 1000);
+  const startTime = new Date();
+  console.log("시작!!", new Date());
+  console.log(stopWatchState);
+  if (!stopWatchState) {
+    stopWatchState = true;
+    console.log(stopWatchState);
+
+    timerState = setInterval(updateTime, 1000);
+  }
 };
 
 const storeStopWatchInfo = (time) => {
@@ -22,6 +31,7 @@ const storeStopWatchInfo = (time) => {
 
 const updateTime = () => {
   time += 1;
+  console.log(time);
   const [hour, minute, second] = storeStopWatchInfo(time);
   displayStopWatch(hour, minute, second);
 };
@@ -32,11 +42,17 @@ const displayStopWatch = (hour = "00", minute = "00", second = "00") => {
 };
 
 const stopStopWatch = () => {
+  const endTime = new Date();
+  console.log(endTime);
+  stopWatchState = false;
+  console.log(stopWatchState);
+
   clearInterval(timerState);
 };
 
 const resetStopWatch = () => {
   time = 0;
+  stopWatchState = false;
   displayStopWatch();
 };
 
@@ -52,4 +68,3 @@ resetBtn.addEventListener("click", () => {
   stopStopWatch();
   resetStopWatch();
 });
-console.log(stopBtn);
