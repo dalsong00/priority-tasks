@@ -7,6 +7,9 @@
     <title>Song's setting</title>
     <link rel="stylesheet" href="./index.css" />
     <script defer src="./js/weather.js"></script>
+    <script defer src="./js/timer.js"></script>
+    <script defer src="./js/today.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,6 +25,18 @@
           <span class="temp"></span>
         </div>
       </header>
+      <main>
+        <section class="time-section">
+          <p class="today"></p>
+          <p class="current-time"></p>
+        </section>
+        <section class="timer-section">
+          <span class="timer">00:00:00</span>
+          <button class="strat-btn">시작</button>
+          <button class="stop-btn">정지</button>
+          <button class="reset-btn">초기화</button>
+        </section>
+      </main>
     </div>
   </body>
 </html>
