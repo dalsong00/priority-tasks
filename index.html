@@ -24,17 +24,74 @@
           <span class="weather"></span>
           <span class="temp"></span>
         </div>
+        <div class="show-menu">
+          <!-- <ul class="menu-section">
+            <li>< 투두리스트</li>
+          </ul> -->
+        </div>
       </header>
       <main>
-        <section class="time-section">
-          <p class="today"></p>
-          <p class="current-time"></p>
+        <section class="time-stop-watch-section">
+          <article class="time-section">
+            <h1 class="today"></h1>
+            <h2 class="current-time"></h2>
+          </article>
+          <article class="timer-section">
+            <span class="timer">00:00:00</span>
+            <button class="strat-btn">시작</button>
+            <button class="stop-btn">정지</button>
+            <button class="reset-btn">초기화</button>
+          </article>
         </section>
-        <section class="timer-section">
-          <span class="timer">00:00:00</span>
-          <button class="strat-btn">시작</button>
-          <button class="stop-btn">정지</button>
-          <button class="reset-btn">초기화</button>
+        <section class="todo-section">
+          <div class="todo-wrapper">
+            <h2 class="todo-title">해야할 일</h2>
+            <div class="todo-add-list">
+              <div class="todo-input-wrapper">
+                <span>할일</span>
+                <input class="todo-input" placeholder="할 일을 입력하세요." />
+              </div>
+              <div class="todo-check-importance">
+                <span>중요도</span>
+                <label> <input type="checkbox" /></label>
+              </div>
+              <div class="todo-check-urgency">
+                <span>긴급도</span>
+                <label>
+                  <input type="checkbox" />
+                </label>
+              </div>
+              <button class="todo-add-btn">추가</button>
+            </div>
+            <div class="todolist-quadrant-wrapper">
+              <div class="quadrant quadrant2">
+                <ul>
+                  2. 계획해야 할 일
+                </ul>
+              </div>
+              <div class="quadrant quadrant1">
+                <ul>
+                  1. 해야할 일
+                </ul>
+              </div>
+              <div class="quadrant quadrant3">
+                <ul>
+                  3. 위임할 일
+                </ul>
+              </div>
+              <div class="quadrant quadrant4">
+                <ul>
+                  4. 삭제할 일
+                </ul>
+              </div>
+            </div>
+            <div clas="quardran-graph-item">
+              <div class="arrow-border arrow-top"></div>
+              <div class="arrow-border arrow-right"></div>
+              <span class="graph-importance">중요도</span>
+              <span class="graph-urgency">긴급도</span>
+            </div>
+          </div>
         </section>
       </main>
     </div>
