@@ -7,9 +7,9 @@
     <title>Song's setting</title>
     <link rel="stylesheet" href="./index.css" />
     <script defer src="./js/weather.js"></script>
-    <script defer src="./js/timer.js"></script>
+    <script defer src="./js/stopWatch.js"></script>
     <script defer src="./js/today.js"></script>
-
+    <script defer src="./js/todoList.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,12 +24,10 @@
           <span class="weather"></span>
           <span class="temp"></span>
         </div>
-        <div class="show-menu">
-          <!-- <ul class="menu-section">
-            <li>< 투두리스트</li>
-          </ul> -->
-        </div>
       </header>
+      <div class="index-section">
+        <div class="index-arrow"></div>
+      </div>
       <main>
         <section class="time-stop-watch-section">
           <article class="time-section">
@@ -43,46 +41,44 @@
             <button class="reset-btn">초기화</button>
           </article>
         </section>
-        <section class="todo-section">
+        <section class="todo-section hide">
           <div class="todo-wrapper">
+            <div class="index-section-hide">
+              <div class="index-arrow-hide"></div>
+            </div>
             <h2 class="todo-title">해야할 일</h2>
             <div class="todo-add-list">
-              <div class="todo-input-wrapper">
+              <div class="todo-input-wrapper hide">
                 <span>할일</span>
                 <input class="todo-input" placeholder="할 일을 입력하세요." />
               </div>
               <div class="todo-check-importance">
                 <span>중요도</span>
-                <label> <input type="checkbox" /></label>
+                <input type="checkbox" class="importance-checkbox" />
               </div>
               <div class="todo-check-urgency">
                 <span>긴급도</span>
-                <label>
-                  <input type="checkbox" />
-                </label>
+                <input type="checkbox" class="urgency-checkbox" />
               </div>
               <button class="todo-add-btn">추가</button>
+              <button class="todo-remove-all-btn">전체삭제</button>
             </div>
             <div class="todolist-quadrant-wrapper">
               <div class="quadrant quadrant2">
-                <ul>
-                  2. 계획해야 할 일
-                </ul>
+                2. 계획해야 할 일
+                <ul class="quadrant-list quadrant2-list"></ul>
               </div>
               <div class="quadrant quadrant1">
-                <ul>
-                  1. 해야할 일
-                </ul>
+                1. 해야할 일
+                <ul class="quadrant-list quadrant1-list"></ul>
               </div>
               <div class="quadrant quadrant3">
-                <ul>
-                  3. 위임할 일
-                </ul>
+                3. 위임할 일
+                <ul class="quadrant-list quadrant3-list"></ul>
               </div>
               <div class="quadrant quadrant4">
-                <ul>
-                  4. 삭제할 일
-                </ul>
+                4. 삭제할 일
+                <ul class="quadrant-list quadrant4-list"></ul>
               </div>
             </div>
             <div clas="quardran-graph-item">
