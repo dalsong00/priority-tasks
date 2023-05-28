@@ -137,6 +137,10 @@ main {
   border: 1px solid black;
   cursor: pointer;
 }
+
+.timer {
+  text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
+}
 /* 투두리스트 */
 
 .todo-section {
@@ -250,7 +254,7 @@ input[type="checkbox"] {
 }
 
 .quadrant2 {
-  background-color: rgba(255, 160, 122, 0.5);
+  background-color: lightsalmon;
   border-bottom: 2px solid black;
 }
 

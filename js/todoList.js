@@ -7,6 +7,10 @@ const urgencyCheck = getSelector(".urgency-checkbox");
 const addTodoBtn = getSelector(".todo-add-btn");
 const removeAllTodoBtn = getSelector(".todo-remove-all-btn");
 
+const indexBtn = getSelector(".index-section");
+const indexHideBtn = getSelector(".index-section-hide");
+const todoSection = getSelector(".todo-section");
+
 const quadrantList = getSelectorAll(".quadrant");
 const quadrant1 = getSelector(".quadrant1-list");
 const quadrant2 = getSelector(".quadrant2-list");
@@ -37,6 +41,7 @@ const checkLocalStorage = () => {
   }
 };
 
+// 완료 상태인 투두리스트가 있으면 completed 클래스 추가
 const checkCompletedTodoList = (todoList) => {
   const completedTodo = todoList
     .filter((item) => item.completed)
@@ -65,27 +70,18 @@ const addTodoList = () => {
   return newTodo;
 };
 
-const addAndDisplayTodo = () => {
-  if (!todoInput.value) {
-    return;
-  }
-
-  let newTodo = addTodoList();
-  displayTodo(newTodo);
-  setLocalStorage("todoList", todoList);
-  clearTodoInput();
+// 추가될 투두리스트의 템플릿
+const addNewItemTemplate = (id, content) => {
+  return `<li id=${id} class="todo-item-list">
+      <input class="todo-toggle" type="checkbox" />
+      <label id=${id} class="todo-content">${content}</label>
+      <button class="todo-item-remove-btn" id="${id}" onClick="removeTodo(event)">X</button>
+  </li>`;
 };
 
-const setLocalStorage = (key, value) => {
-  window.localStorage.setItem(key, JSON.stringify(value));
-};
-
-const getLocalStorage = (key) => {
-  return window.localStorage.getItem(key);
-};
-
-const removeLocalStorage = (key) => {
-  window.localStorage.removeItem(key);
+// 새로운 투두 추가하기
+const createNewTodo = (id, content, quadrant) => {
+  quadrant.insertAdjacentHTML("beforeend", addNewItemTemplate(id, content));
 };
 
 // 4분면에 배치
@@ -102,7 +98,17 @@ const clearTodoInput = () => {
   urgencyCheck.checked = false;
 };
 
-addTodoBtn.addEventListener("click", addAndDisplayTodo);
+// 투두리스트 add 관련 함수 실행
+const addAndDisplayTodo = () => {
+  if (!todoInput.value) {
+    return;
+  }
+
+  let newTodo = addTodoList();
+  displayTodo(newTodo);
+  setLocalStorage("todoList", todoList);
+  clearTodoInput();
+};
 
 // 화면에 나타날 때 어느 분면에 나타낼지 분리
 const displayTodo = (todo) => {
@@ -122,18 +128,19 @@ const displayTodo = (todo) => {
   }
 };
 
-// 추가될 투두리스트의 템플릿
-const addNewItemTemplate = (id, content) => {
-  return `<li id=${id} class="todo-item-list">
-      <input class="todo-toggle" type="checkbox" />
-      <label id=${id} class="todo-content">${content}</label>
-      <button class="todo-item-remove-btn" id="${id}" onClick="removeTodo(event)">X</button>
-  </li>`;
+// 로컬스토리지에 저장하기
+const setLocalStorage = (key, value) => {
+  window.localStorage.setItem(key, JSON.stringify(value));
 };
 
-// 새로운 투두 추가하기
-const createNewTodo = (id, content, quadrant) => {
-  quadrant.insertAdjacentHTML("beforeend", addNewItemTemplate(id, content));
+// 로컬스토리지에서 가져오기
+const getLocalStorage = (key) => {
+  return window.localStorage.getItem(key);
+};
+
+// 로컬스토리지에서 제거하기
+const removeLocalStorage = (key) => {
+  window.localStorage.removeItem(key);
 };
 
 // 개별 삭제하기
@@ -154,9 +161,11 @@ const removeAllTodo = () => {
   removeLocalStorage("todoList");
 };
 
-removeAllTodoBtn.addEventListener("click", removeAllTodo);
-
+// oldItemContent를 가져와서 수정 템플릿에 넣기
 const changeTodoTemplate = (target, id) => {
+  if (!target.closest("label")) {
+    return;
+  }
   const oldItemContent = target.closest("label").innerText;
   target.closest("li").innerHTML = modifyItemTemplate(id, oldItemContent);
 };
@@ -169,6 +178,7 @@ const modifyItemTemplate = (id, oldItemContent) => {
     `;
 };
 
+// 수정된 내용을 원래 템플릿에 반영하기
 const changeUpdateItemTemplate = (id, content) => {
   return `
         <input class="todo-toggle" type="checkbox" />
@@ -189,7 +199,7 @@ const updateItem = (e) => {
   }
 };
 
-// 로컬스토리지 투두리스트 업데이트
+// 수정 후 로컬스토리지 투두리스트 업데이트
 const updateLocalTodoList = (id, newItemContent) => {
   todoList = todoList.map((item) => {
     if (item.id === parseInt(id)) {
@@ -201,11 +211,11 @@ const updateLocalTodoList = (id, newItemContent) => {
   setLocalStorage("todoList", todoList);
 };
 
+// 수정 대상의 target과 id를 changeTodoTemplate에 전달
 const makeModifyingTodo = (e) => {
   const target = e.target;
   const { id } = target;
   changeTodoTemplate(target, id);
-  //   updateTodoList(id, newItemContent);
 };
 
 // 투두리스트 내용 업데이트
@@ -217,8 +227,11 @@ const updateTodoList = (id, content) => {
   });
 };
 
-// 체크 시 가운데 줄 긋기
+// 투두리스트 체크(완료) 시 가운데 줄 긋기
 const completeTodo = (e) => {
+  if (!e.target.closest("li") || !e.target.closest("input")) {
+    return;
+  }
   const { id } = e.target.closest("li");
   const { checked } = e.target.closest("input");
   if (checked) {
@@ -230,6 +243,7 @@ const completeTodo = (e) => {
   }
 };
 
+// 완료된 투두리스트 로컬스토리지에도 반영하기
 const updateCompletedTodoList = (id, checked) => {
   todoList.map((item) => {
     if (item.id === parseInt(id)) {
@@ -246,9 +260,9 @@ const updateCompletedTodoList = (id, checked) => {
   item.addEventListener("click", completeTodo);
 });
 
-const indexBtn = getSelector(".index-section");
-const indexHideBtn = getSelector(".index-section-hide");
-const todoSection = getSelector(".todo-section");
+removeAllTodoBtn.addEventListener("click", removeAllTodo);
+
+addTodoBtn.addEventListener("click", addAndDisplayTodo);
 
 indexBtn.addEventListener("click", () => {
   if (!indexBtn.classList.contains("hide")) {

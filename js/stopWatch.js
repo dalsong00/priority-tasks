@@ -38,7 +38,6 @@ const displayStopWatch = (hour = "00", minute = "00", second = "00") => {
 const stopStopWatch = () => {
   const endTime = new Date();
   stopWatchState = false;
-  console.log(timerState);
   clearInterval(timerState);
 };
 
