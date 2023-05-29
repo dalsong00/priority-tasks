@@ -3,7 +3,7 @@ const getLoaction = () => {
   const options = {
     enableHighAccuracy: true,
     maximumAge: 30000,
-    timeout: 30000,
+    timeout: 60000,
   };
 
   navigator.geolocation.getCurrentPosition(

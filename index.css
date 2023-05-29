@@ -8,6 +8,9 @@
 .wrapper {
   width: 100vw;
   height: 100vh;
+  background-image: url("/images/background/Basic.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 /*  날씨 정보 */
