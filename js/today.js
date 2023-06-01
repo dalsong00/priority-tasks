@@ -1,27 +1,29 @@
+import { makeTwoDigits } from "./utilites.js";
+
 const weekday = ["일", "월", "화", "수", "목", "금", "토"];
 
 const hourFormat = (hour) => {
   if (hour > 12) {
-    return `오후 ${(hour - 12).toString().padStart(2, "0")}`;
+    return `오후 ${makeTwoDigits(hour - 12)}`;
   } else {
-    return `오전 ${hour.toString().padStart(2, "0")}`;
+    return `오전 ${makeTwoDigits(hour)}`;
   }
 };
 
 const getCurrentTime = () => {
   const today = new Date();
   const year = today.getFullYear();
-  const month = (today.getMonth() + 1).toString().padStart(2, "0");
-  const date = today.getDate().toString().padStart(2, "0");
+  const month = makeTwoDigits(today.getMonth() + 1);
+  const date = makeTwoDigits(today.getDate());
   const day = weekday[today.getDay()];
   const hour = hourFormat(today.getHours());
-  const minute = today.getMinutes().toString().padStart(2, "0");
+  const minute = makeTwoDigits(today.getMinutes());
 
   return [year, month, date, day, hour, minute];
 };
 
-const updateDisplay = (...arguments) => {
-  const [year, month, date, day, hour, minute] = arguments;
+const updateDisplay = (...rest) => {
+  const [year, month, date, day, hour, minute] = rest;
   displayTodayInfo(year, month, date, day);
   displayTimeInfo(hour, minute);
 };

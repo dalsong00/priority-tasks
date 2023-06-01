@@ -1,3 +1,5 @@
+import { makeTwoDigits } from "./utilites.js";
+
 let time = 0;
 let timerState = null;
 let stopWatchState = false;
@@ -14,13 +16,9 @@ const startStopWatch = () => {
 };
 
 const storeStopWatchInfo = (time) => {
-  let hour = Math.floor(time / 3600)
-    .toString()
-    .padStart(2, "0");
-  let minute = Math.floor((time % 3600) / 60)
-    .toString()
-    .padStart(2, "0");
-  let second = (time % 60).toString().padStart(2, "0");
+  let hour = makeTwoDigits(Math.floor(time / 3600));
+  let minute = makeTwoDigits(Math.floor((time % 3600) / 60));
+  let second = makeTwoDigits(time % 60);
   return [hour, minute, second];
 };
 
@@ -36,7 +34,6 @@ const displayStopWatch = (hour = "00", minute = "00", second = "00") => {
 };
 
 const stopStopWatch = () => {
-  const endTime = new Date();
   stopWatchState = false;
   clearInterval(timerState);
 };
