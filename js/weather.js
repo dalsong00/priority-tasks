@@ -1,4 +1,4 @@
-import config from "../apikey.js";
+import config from "../config/apikey.js";
 
 //현 위치 가져오기
 const getLoaction = () => {
