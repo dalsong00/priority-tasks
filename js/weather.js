@@ -31,7 +31,9 @@ const getLocationErr = (error) => {
 // 날씨 정보 가져오기 : getLocationsuc에서 넘겨받은 위도와 경도 활용
 const getWeatherInfo = async (latitude, longitude) => {
   const APIKEY = WEAHTER_API_KEY.apiKey;
-
+  console.log("WEAHTER_API_KEY", WEAHTER_API_KEY);
+  console.log("braket", WEAHTER_API_KEY[apiKey]);
+  console.log("APIKEY", APIKEY);
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKEY}&units=metric`
