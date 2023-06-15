@@ -1,4 +1,4 @@
-import config from "../config/apikey.js";
+import config from "../apikey.js";
 import { WEATHER_LIST } from "../data/data.js";
 
 //현 위치 가져오기
