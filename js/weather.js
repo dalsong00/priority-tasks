@@ -1,4 +1,4 @@
-import config from "../apikey.js";
+import WEAHTER_API_KEY from "../apikey.js";
 import { WEATHER_LIST } from "../data/data.js";
 
 //현 위치 가져오기
@@ -30,7 +30,7 @@ const getLocationErr = (error) => {
 
 // 날씨 정보 가져오기 : getLocationsuc에서 넘겨받은 위도와 경도 활용
 const getWeatherInfo = async (latitude, longitude) => {
-  const APIKEY = config.apiKey;
+  const APIKEY = WEAHTER_API_KEY;
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKEY}&units=metric`
