@@ -30,9 +30,7 @@ const getLocationErr = (error) => {
 
 // 날씨 정보 가져오기 : getLocationsuc에서 넘겨받은 위도와 경도 활용
 const getWeatherInfo = async (latitude, longitude) => {
-  const APIKEY = WEAHTER_API_KEY;
-  console.log("WEAHTER_API_KEY", WEAHTER_API_KEY);
-  console.log("APIKEY", APIKEY);
+  const APIKEY = apiKey.WEAHTER_API_KEY;
 
   try {
     const response = await fetch(
