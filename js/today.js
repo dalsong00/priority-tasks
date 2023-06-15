@@ -1,6 +1,5 @@
 import { makeTwoDigits } from "./utilites.js";
-
-const weekday = ["일", "월", "화", "수", "목", "금", "토"];
+import { WEEKDAY } from "../data/data.js";
 
 const hourFormat = (hour) => {
   if (hour > 12) {
@@ -15,7 +14,7 @@ const getCurrentTime = () => {
   const year = today.getFullYear();
   const month = makeTwoDigits(today.getMonth() + 1);
   const date = makeTwoDigits(today.getDate());
-  const day = weekday[today.getDay()];
+  const day = WEEKDAY[today.getDay()];
   const hour = hourFormat(today.getHours());
   const minute = makeTwoDigits(today.getMinutes());
 
