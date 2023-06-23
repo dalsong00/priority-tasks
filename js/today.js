@@ -1,4 +1,4 @@
-import { makeTwoDigits } from "./utilites.js";
+import { makeTwoDigits } from "./utilities.js";
 import { WEEKDAY } from "../data/data.js";
 
 const hourFormat = (hour) => {

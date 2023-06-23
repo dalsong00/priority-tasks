@@ -1,4 +1,4 @@
-import { makeTwoDigits } from "./utilites.js";
+import { makeTwoDigits } from "./utilities.js";
 
 let time = 0;
 let timerState = null;
